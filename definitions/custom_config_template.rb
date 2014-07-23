@@ -5,6 +5,8 @@
 #
 
 define :custom_config_template do
+  Chef::Log.debug("Applying custom config entries for #{params[:application]}")
+  Chef::Log.debug(params.inspect)
   params[:custom_config][params[:application]].each do |file_name, config|
     template "#{params[:deploy][:deploy_to]}/shared/config/#{file_name}.yml" do
       source "sample.yml.erb"
